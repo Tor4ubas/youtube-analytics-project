@@ -39,6 +39,41 @@ class Channel:
         """ Выводит в консоль информацию о канале """
         self.__printj(self.get_service().channels().list(id=self.channel_id, part='snippet,statistics').execute())
 
+    def __str__(self):
+        """ Метод, возвращающий название и ссылку на канал """
+
+        return f"{self.title} ({self.url})"
+
+    def __add__(self, other):
+        """ Метод для сложения 2х каналов """
+
+        return self.count_subscribers + other.count_subscribers
+
+    def __sub__(self, other):
+        """ Метод для вычитания 2х каналов """
+
+        return self.count_subscribers - other.count_subscribers
+
+    def __lt__(self, other):
+        """ Метод для сравниения 2х каналов между собой """
+
+        return self.count_subscribers < other.count_subscribers
+
+    def __le__(self, other):
+        """ Метод для сравниения 2х каналов между собой """
+
+        return self.count_subscribers <= other.count_subscribers
+
+    def __gt__(self, other):
+        """ Метод для сравниения 2х каналов между собой """
+
+        return self.count_subscribers > other.count_subscribers
+
+    def __ge__(self, other):
+        """ Метод для сравниения 2х каналов между собой """
+
+        return self.count_subscribers >= other.count_subscribers
+
     def to_json(self, filename):
         """ Метод, сохраняющий в файл значения атрибутов экземпляра Channel """
         data = {
